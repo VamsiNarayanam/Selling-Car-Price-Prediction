@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+
+    <style>
+
+ body {
+
+    text-align: center;
+    padding: 0;
+    margin: 0;
+     background-image: url("/static/assets/images/CarSal.jpeg");
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center;
+     opacity: 1;
+      height: 100vh;
+}
+
+#box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #2c3e50;
+    background-color: rgba(255, 255, 255,0.9);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+      width: 80%;
+      max-width: 400px;
+      padding: 20px;
+}
+
+h2 {
+    font-family: Georgia, serif;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+form {
+    margin-top: 25px;
+}
+
+label, select {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+select:hover {
+    background-color: coral;
+}
+
+button {
+    margin-top: 25px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#prediction_text {
+    font-family: system-ui;
+      text-align: center;
+      margin-top: 20px;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+      color: #333;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 600px) {
+    #box {
+        width: 90%;
+        max-width: 350px;
+    }
+}
+
+
+    </style>
+
+</head>
+
+<body>
+    <div id="box">
+        <h2>CAR SALES PREDICTION</h2>
+        <form action="{{ url_for('predict')}}" method="post">
+            <label for="Year">MODEL YEAR</label>
+            <input id="first" name="Year" type="number" required>
+            <br><br>
+            <label for="Present_Price">SHOWROOM PRICE (IN LAKHS)</label>
+            <input id="second" name="Present_Price" required>
+            <br><br>
+            <label for="Kms_Driven">KILOMETERS DRIVEN</label>
+            <input id="third" name="Kms_Driven" required>
+            <br><br>
+            <label for="Owner">NUMBER OF OWNERS USED PREVIOUSLY</label>
+            <input id="fourth" name="Owner" required>
+            <br><br>
+            <label for="Fuel_Type_Petrol">FUEL TYPE</label>
+            <select name="Fuel_Type_Petrol" id="fuel" required>
+                <option value="Petrol">PETROL</option>
+                <option value="Diesel">DIESEL</option>
+                <option value="CNG">CNG</option>
+            </select>
+            <br>
+            <label for="Seller_Type_Individual">SELLER TYPE</label>
+            <select name="Seller_Type_Individual" id="resea" required>
+                <option value="Dealer">DEALER</option>
+                <option value="Individual">INDIVIDUAL</option>
+            </select>
+            <br>
+            <label for="Transmission_Mannual">TRANSMISSION TYPE</label>
+            <select name="Transmission_Mannual" id="research" required>
+                <option value="Mannual">MANUAL</option>
+                <option value="Automatic">AUTOMATIC</option>
+            </select>
+
+            <button type="submit">CALCULATE SELLING PRICE</button>
+        </form>
+
+        <div id="prediction_text">
+            <h3>{% if prediction_text %}
+                {{ prediction_text }}
+                {% endif %}</h3>
+        </div>
+    </div>
+
+</body>
+
+</html>
